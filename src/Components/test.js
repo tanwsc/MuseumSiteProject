@@ -14,6 +14,7 @@ const APITest = () => {
     dimensions: "",
     image: "",
   });
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     fetch(harvardArtMuseumApi)
@@ -36,7 +37,7 @@ const APITest = () => {
           image: data.records[0].primaryimageurl,
         });
       });
-  }, []);
+  }, [toggle]);
 
   return (
     <div>
