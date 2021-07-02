@@ -5,6 +5,7 @@ const apikey = process.env.REACT_APP_APIKEY;
 const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&classification=75&size=1`;
 
 const APITest = () => {
+  const [status, setStatus] = useState("Loading");
   const [data, setData] = useState({
     title: "",
     period: "",
@@ -15,7 +16,7 @@ const APITest = () => {
     image: "",
   });
 
-  // const handleClick = () => {
+  // useEffect(() => {
   //   fetch(harvardArtMuseumApi)
   //     .then((res) => {
   //       if (res.ok) {
@@ -36,19 +37,14 @@ const APITest = () => {
   //         image: data.records[0].primaryimageurl,
   //       });
   //     });
-  // };
+  // }, []);
 
   useEffect(() => {
-    fetch(harvardArtMuseumApi)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error("Bad Response from server");
-        }
-      })
-      .then((data) => {
-        console.log(data);
+    const makeAPICall = async () => {
+      try {
+        const res = await fetch(harvardArtMuseumApi);
+        const data = await res.json();
+
         setData({
           title: data.records[0].title,
           period: data.records[0].period,
@@ -58,8 +54,14 @@ const APITest = () => {
           dimensions: data.records[0].dimensions,
           image: data.records[0].primaryimageurl,
         });
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    makeAPICall();
   }, []);
+
+  const display = () => {};
 
   return (
     <div>
