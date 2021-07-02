@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const apikey = process.env.REACT_APP_APIKEY;
 const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&classification=75&size=1`;
@@ -14,9 +14,8 @@ const APITest = () => {
     dimensions: "",
     image: "",
   });
-  const [toggle, setToggle] = useState(false);
 
-  useEffect(() => {
+  const handleClick = () => {
     fetch(harvardArtMuseumApi)
       .then((res) => {
         if (res.ok) {
@@ -37,10 +36,34 @@ const APITest = () => {
           image: data.records[0].primaryimageurl,
         });
       });
-  }, [toggle]);
+  };
+
+  // useEffect(() => {
+  //   fetch(harvardArtMuseumApi)
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       } else {
+  //         throw new Error("Bad Response from server");
+  //       }
+  //     })
+  //     .then((data) => {
+  //       console.log(data);
+  //       setData({
+  //         title: data.records[0].title,
+  //         period: data.records[0].period,
+  //         date: data.records[0].dated,
+  //         classification: data.records[0].classification,
+  //         medium: data.records[0].medium,
+  //         dimensions: data.records[0].dimensions,
+  //         image: data.records[0].primaryimageurl,
+  //       });
+  //     });
+  // }, []);
 
   return (
     <div>
+      <button onClick={handleClick}>click</button>
       <h3>{data.title}</h3>
       <p>{data.period}</p>
       <p>{data.date}</p>
