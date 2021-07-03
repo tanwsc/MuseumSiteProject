@@ -1,9 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-const apikey = process.env.REACT_APP_APIKEY;
-const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&classification=21&size=10`;
-
 // classifications
 // 17 - photographs
 // 21 - drawings
@@ -24,10 +21,13 @@ const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${a
 //   "primaryimageurl",
 // ];
 
-const ArtObject = () => {
+const ArtObject = ({ artSet }) => {
   const [status, setStatus] = useState("loading");
   const [data, setData] = useState([]);
   const [current, setCurrent] = useState(0);
+
+  const apikey = process.env.REACT_APP_APIKEY;
+  const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&medium=2028336&size=15&page=${artSet}`;
 
   //////////////////////////////////////////////////////////////// fetch api
   useEffect(() => {
@@ -120,13 +120,19 @@ const ArtObject = () => {
       }
     };
     makeAPICall();
-  }, []);
+  }, [artSet]);
   console.log(data);
 
-  //////////////////////////////////////////////////////////////// go next
+  //////////////////////////////////////////////////////////////// navigate obj
   // when next, render next obj in arr
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % data.length);
+  };
+  // prev, render previous
+  const handlePrev = () => {
+    setCurrent(
+      current === 0 ? data.length - 1 : (prev) => (prev - 1) % data.length
+    );
   };
 
   // display status
@@ -155,7 +161,8 @@ const ArtObject = () => {
 
   return (
     <div>
-      <button onClick={handleNext}>Next</button>
+      <button onClick={handlePrev}>{"<"}</button>
+      <button onClick={handleNext}>{">"}</button>
       <br />
       {display()}
     </div>
