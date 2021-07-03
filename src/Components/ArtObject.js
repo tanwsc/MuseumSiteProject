@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-// import ArtObjects from "./ArtObjects";
-
 const apikey = process.env.REACT_APP_APIKEY;
 const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&classification=21&size=10`;
 
@@ -13,22 +11,23 @@ const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${a
 // 26 - paintings
 // 80 - paintings with calligraphy
 
+// keys to check for
+// const objectDetail = [
+//   "title",
+//   "people",
+//   "period",
+//   "dated",
+//   "classification",
+//   "medium",
+//   "dimensions",
+//   "description",
+//   "primaryimageurl",
+// ];
+
 const ArtObject = () => {
   const [status, setStatus] = useState("loading");
   const [data, setData] = useState([]);
-
-  // keys to check for
-  const objectDetail = [
-    "title",
-    "people",
-    "period",
-    "dated",
-    "classification",
-    "medium",
-    "dimensions",
-    "description",
-    "primaryimageurl",
-  ];
+  const [current, setCurrent] = useState(0);
 
   //////////////////////////////////////////////////////////////// fetch api
   useEffect(() => {
@@ -124,39 +123,65 @@ const ArtObject = () => {
   }, []);
   console.log(data);
 
-  //////////////////////////////////////////////////////////////// map out data
-  // only available keys and key values in each obj
-  const mapData = (data) => {
-    return data.map((art, index) => {
-      // console.log(art);
-      return (
-        <div key={index}>
-          <h3>{art.title}</h3>
-          <p>{art.description}</p>
-          <p>{art.date}</p>
-          <p>{art.artist}</p>
-          <p>{art.classification}</p>
-          <p>{art.culture}</p>
-          <p>{art.period}</p>
-          <p>{art.medium}</p>
-          <p>{art.dimensions}</p>
-          <img src={art.image} alt="img" />
-        </div>
-      );
-    });
+  //////////////////////////////////////////////////////////////// go next
+  // when next, render next obj in arr
+  const handleNext = () => {
+    setCurrent((prev) => (prev + 1) % data.length);
   };
 
   // display status
   const display = () => {
     if (status === "loading") {
-      return "Loading";
+      return <p>Loading</p>;
     } else if (status === "resolved") {
       console.log("resolved");
-      return mapData(data);
+      console.log(data);
+      return (
+        <div>
+          <h3>{data?.[current]?.title}</h3>
+          <p>{data?.[current]?.description}</p>
+          <p>{data?.[current]?.date}</p>
+          <p>{data?.[current]?.artist}</p>
+          <p>{data?.[current]?.classification}</p>
+          <p>{data?.[current]?.culture}</p>
+          <p>{data?.[current]?.period}</p>
+          <p>{data?.[current]?.medium}</p>
+          <p>{data?.[current]?.dimensions}</p>
+          <img src={data?.[current]?.image} alt="img" />
+        </div>
+      );
     }
   };
 
-  return <div>{display()}</div>;
+  return (
+    <div>
+      <button onClick={handleNext}>Next</button>
+      <br />
+      {display()}
+    </div>
+  );
 };
 
 export default ArtObject;
+
+//////////////////////////////////////////////////////////////// map out data
+// only available keys and key values in each obj
+// const mapData = (data) => {
+//   return data.map((art, index) => {
+//     // console.log(art);
+//     return (
+//       <div key={index}>
+//         <h3>{art.title}</h3>
+//         <p>{art.description}</p>
+//         <p>{art.date}</p>
+//         <p>{art.artist}</p>
+//         <p>{art.classification}</p>
+//         <p>{art.culture}</p>
+//         <p>{art.period}</p>
+//         <p>{art.medium}</p>
+//         <p>{art.dimensions}</p>
+//         <img src={art.image} alt="img" />
+//       </div>
+//     );
+//   });
+// };
