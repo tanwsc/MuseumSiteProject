@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -21,6 +21,11 @@ h3 {
 
 p {
   color: rgb(0, 48, 63);
+}
+
+h3,
+p {
+  padding-left: 10px;
 }
 
 button {
@@ -50,25 +55,37 @@ input[type="text"]:focus {
 }
 
 img {
-  max-width: 700px;
+  max-width: 80%;
 }
 
 .art-main {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  margin: 30px auto;
+  width: 90%;
 }
 
-.art-info {
-  grid-column: 1 / 2;
-  padding: 10px;
-}
+@media screen and (min-width: 900px) {
+  img {
+    margin: 10px 20px 10px 20px;
+    max-width: 700px;
+  }
 
-.art-info p {
-  padding: 20px;
-  background: rgb(223, 211, 195);
-}
+  .art-main {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 2fr;
+  }
 
-.art-image {
-  grid-column: 2 / 3;
+  .art-info {
+    grid-column: 1 / 2;
+    padding: 10px 10px 10px 0;
+  }
 
+  .art-info p {
+    padding: 20px;
+    background: rgb(223, 211, 195);
+  }
+
+  .art-image {
+    grid-column: 2 / 3;
+  }
 }
