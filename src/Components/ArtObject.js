@@ -9,6 +9,13 @@ import { Link } from "react-router-dom";
 // 26 - paintings
 // 80 - paintings with calligraphy
 
+// mediums
+// 2028195 - ink
+// 2028177 - oil
+// 2028387 - textile materials
+// 2028206 - watercolour
+// 2028955 - ink and opaque watercolour
+
 // keys to check for
 // const objectDetail = [
 //   "title",
@@ -29,7 +36,7 @@ const ArtObject = () => {
   const [current, setCurrent] = useState(0);
 
   const apikey = process.env.REACT_APP_APIKEY;
-  const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&medium=2028336&size=5&page=${click}`;
+  const harvardArtMuseumUrl = `https://api.harvardartmuseums.org/object?apikey=${apikey}&medium=2028177&size=5&page=${click}`;
   // NOTE: make useReducer for generating sets
 
   const linkStyle = {
@@ -47,7 +54,7 @@ const ArtObject = () => {
     const makeAPICall = async () => {
       setStatus("loading");
       try {
-        const res = await fetch(harvardArtMuseumApi);
+        const res = await fetch(harvardArtMuseumUrl);
         const museum = await res.json();
         setStatus("resolved");
         console.log(museum.records);
@@ -64,30 +71,6 @@ const ArtObject = () => {
           }
           return true;
         });
-        // .filter((r) => {
-        //   for (let keys of objectDetail) {
-        //     if (r[keys] === null) {
-        //       return false;
-        //     }
-        //   }
-        //   return true;
-        // })
-        // .filter((r) => {
-        //   for (let keys of objectDetail) {
-        //     if (r[keys] === "") {
-        //       return false;
-        //     }
-        //   }
-        //   return true;
-        // })
-        // .filter((r) => {
-        //   if (r.people.length === 0) {
-        //     return false;
-        //   } else if (r.people[0].name === null || r.people[0].name === "") {
-        //     return false;
-        //   }
-        //   return true;
-        // });
         console.log(filterData);
 
         // find artist name if exists
@@ -134,7 +117,7 @@ const ArtObject = () => {
       }
     };
     makeAPICall();
-  }, [harvardArtMuseumApi]);
+  }, [harvardArtMuseumUrl]);
   console.log(data);
 
   //////////////////////////////////////////////////////////////// navigate obj
