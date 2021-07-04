@@ -1,20 +1,30 @@
 import "./App.css";
-import { useState } from "react";
+import { Route, Switch } from "react-router-dom";
+import Home from "./Components/Home.js";
 import ArtObject from "./Components/ArtObject.js";
+import SearchArt from "./Components/SearchArt.js";
 
 function App() {
-  const [click, setClick] = useState(1);
-
-  // change old set with new set
-  const handleNewSet = () => {
-    setClick((prev) => prev + 1);
-  };
-
   return (
     <div className="App">
-      <h1>Art Set {click}</h1>
-      <button onClick={handleNewSet}>New Set</button>
-      <ArtObject artSet={click} />
+      <main>
+        <Switch>
+          {/* Home page */}
+          <Route exact path='/'>
+            <Home />
+          </Route>
+
+          {/* Art sets */}
+          <Route path='/art'>
+            <ArtObject />
+          </Route>
+
+          {/* Search page */}
+          <Route path='/search'>
+            <SearchArt />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // classifications
 // 17 - photographs
@@ -21,17 +22,30 @@ import { useState, useEffect } from "react";
 //   "primaryimageurl",
 // ];
 
-const ArtObject = ({ artSet }) => {
+const ArtObject = () => {
   const [status, setStatus] = useState("loading");
   const [data, setData] = useState([]);
+  const [click, setClick] = useState(1);
   const [current, setCurrent] = useState(0);
 
   const apikey = process.env.REACT_APP_APIKEY;
-  const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&medium=2028336&size=15&page=${artSet}`;
+  const harvardArtMuseumApi = `https://api.harvardartmuseums.org/object?apikey=${apikey}&medium=2028336&size=5&page=${click}`;
+  // NOTE: make useReducer for generating sets
+
+  const linkStyle = {
+    margin: "10px 10px",
+    padding: "10px",
+    "border-radius": "5px",
+    background: "rgb(223, 211, 195)",
+    color: "rgb(89, 110, 121)",
+    "font-size": "14px",
+    "text-decoration": "none",
+  };
 
   //////////////////////////////////////////////////////////////// fetch api
   useEffect(() => {
     const makeAPICall = async () => {
+      setStatus("loading");
       try {
         const res = await fetch(harvardArtMuseumApi);
         const museum = await res.json();
@@ -120,7 +134,7 @@ const ArtObject = ({ artSet }) => {
       }
     };
     makeAPICall();
-  }, [artSet]);
+  }, [click]);
   console.log(data);
 
   //////////////////////////////////////////////////////////////// navigate obj
@@ -134,6 +148,12 @@ const ArtObject = ({ artSet }) => {
       current === 0 ? data.length - 1 : (prev) => (prev - 1) % data.length
     );
   };
+  // change old set with new set
+  const handleNewSet = () => {
+    setCurrent(0);
+    setData([]);
+    setClick((prev) => prev + 1);
+  };
 
   // display status
   const display = () => {
@@ -143,27 +163,42 @@ const ArtObject = ({ artSet }) => {
       console.log("resolved");
       console.log(data);
       return (
-        <div>
-          <h3>{data?.[current]?.title}</h3>
-          <p>{data?.[current]?.description}</p>
-          <p>{data?.[current]?.date}</p>
-          <p>{data?.[current]?.artist}</p>
-          <p>{data?.[current]?.classification}</p>
-          <p>{data?.[current]?.culture}</p>
-          <p>{data?.[current]?.period}</p>
-          <p>{data?.[current]?.medium}</p>
-          <p>{data?.[current]?.dimensions}</p>
-          <img src={data?.[current]?.image} alt="img" />
-        </div>
+        <>
+          <div className="art-info">
+            <h3>{data?.[current]?.title}</h3>
+            <p>{data?.[current]?.description}</p>
+            <p>{data?.[current]?.date}</p>
+            <p>{data?.[current]?.artist}</p>
+            <p>{data?.[current]?.classification}</p>
+            <p>{data?.[current]?.culture}</p>
+            <p>{data?.[current]?.period}</p>
+            <p>{data?.[current]?.medium}</p>
+            <p>{data?.[current]?.dimensions}</p>
+          </div>
+
+          <div className="art-image">
+            <p>
+              {current + 1} / {data.length}
+            </p>
+            <img src={data?.[current]?.image} alt="img" />
+          </div>
+        </>
       );
     }
   };
 
   return (
-    <div>
-      <button onClick={handlePrev}>{"<"}</button>
-      <button onClick={handleNext}>{">"}</button>
-      <br />
+    <div className="art-main">
+      <div>
+        <Link to="/" style={linkStyle}>
+          Back to Home
+        </Link>
+        <button onClick={handleNewSet}>New Set</button>
+      </div>
+      <div className="nav-button">
+        <button onClick={handlePrev}>{"<"}</button>
+        <button onClick={handleNext}>{">"}</button>
+      </div>
       {display()}
     </div>
   );
