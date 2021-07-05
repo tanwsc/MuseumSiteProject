@@ -15,17 +15,22 @@ code {
 }
 
 h1,
-h3 {
+h2 {
   color: rgb(136, 110, 77);
+}
+
+h2 {
+  font-style: italic;
 }
 
 p {
   color: rgb(0, 48, 63);
+  padding-left: 10px;
 }
 
-h3,
-p {
-  padding-left: 10px;
+span {
+  font-size: 14px;
+  font-style: italic;
 }
 
 button {
@@ -58,7 +63,8 @@ img {
   max-width: 80%;
 }
 
-.art-main {
+.art-main,
+.search {
   margin: 30px auto;
   width: 90%;
 }
@@ -85,8 +91,14 @@ img {
     padding: 10px 0;
   }
 
+  .art-info h2 {
+    margin: 50px auto 40px auto;
+    width: 70%;
+  }
+
   .art-info p {
-    padding: 20px;
+    padding: 20px 20%;
+    /* width: 70%; */
     background: rgb(223, 211, 195);
     line-height: 1.4em;
   }
