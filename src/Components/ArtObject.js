@@ -145,7 +145,6 @@ const ArtObject = ({ style }) => {
     setClick((prev) => prev + 1);
   };
 
-  
   // display status
   const display = () => {
     if (status === "loading") {
@@ -157,34 +156,66 @@ const ArtObject = ({ style }) => {
         <>
           <div className="art-info">
             {/* {mapData(data)} */}
-            <h3>{data?.[current]?.title}</h3>
+            <h2>{data?.[current]?.title}</h2>
             {data?.[current]?.description !== null ? (
-              <p>{data?.[current]?.description}</p>
-              ) : null}
+              <p>
+                <span>Description</span>
+                <br />
+                {data?.[current]?.description}
+              </p>
+            ) : null}
             {data?.[current]?.date !== null ? (
-              <p>{data?.[current]?.date}</p>
-              ) : null}
+              <p>
+                <span>Date</span>
+                <br />
+                {data?.[current]?.date}
+              </p>
+            ) : null}
             {data?.[current]?.hasOwnProperty("artist") &&
             data?.[current]?.artist !== null ? (
-              <p>{data?.[current]?.artist}</p>
-              ) : null}
+              <p>
+                <span>Artist/s</span>
+                <br />
+                {data?.[current]?.artist}
+              </p>
+            ) : null}
             {data?.[current]?.classification !== null ? (
-              <p>{data?.[current]?.classification}</p>
-              ) : null}
+              <p>
+                <span>Classification</span>
+                <br />
+                {data?.[current]?.classification}
+              </p>
+            ) : null}
             {data?.[current]?.culture !== null ? (
-              <p>{data?.[current]?.culture}</p>
-              ) : null}
-            {data?.[current]?.date !== null ? (
-              <p>{data?.[current]?.period}</p>
-              ) : null}
+              <p>
+                <span>Culture</span>
+                <br />
+                {data?.[current]?.culture}
+              </p>
+            ) : null}
+            {data?.[current]?.period !== null ? (
+              <p>
+                <span>Period</span>
+                <br />
+                {data?.[current]?.period}
+              </p>
+            ) : null}
             {data?.[current]?.medium !== null ? (
-              <p>{data?.[current]?.medium}</p>
-              ) : null}
+              <p>
+                <span>Medium</span>
+                <br />
+                {data?.[current]?.medium}
+              </p>
+            ) : null}
             {data?.[current]?.dimensions !== null ? (
-              <p>{data?.[current]?.dimensions}</p>
-              ) : (
-                data?.[current]?.dimensions
-                )}
+              <p>
+                <span>Dimensions</span>
+                <br />
+                {data?.[current]?.dimensions}
+              </p>
+            ) : (
+              data?.[current]?.dimensions
+            )}
           </div>
 
           <div className="art-image">
@@ -197,7 +228,7 @@ const ArtObject = ({ style }) => {
       );
     }
   };
-  
+
   return (
     <div className="art-main">
       <div>
