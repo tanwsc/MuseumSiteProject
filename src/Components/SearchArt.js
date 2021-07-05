@@ -15,6 +15,7 @@ const SearchArt = ({ style }) => {
   // get input word
   const handleSearch = () => {
     setStatus("loading");
+    setData([]);
     console.log(inputSearchRef.current.value);
 
     // fetch based on input data
@@ -22,7 +23,7 @@ const SearchArt = ({ style }) => {
       setStatus("loading");
       try {
         const res = await fetch(
-          `${harvardArtMuseumUrl}&classification=${inputSearchRef.current.value}&size=5&page=${click}`
+          `${harvardArtMuseumUrl}&title=${inputSearchRef.current.value}&size=5&page=${click}`
         );
         const searchResult = await res.json();
         setStatus("resolved");
@@ -84,23 +85,23 @@ const SearchArt = ({ style }) => {
       }
     };
     makeAPICall();
+  };
 
-    // when next, render next obj in arr
-    const handleNext = () => {
-      setCurrent((prev) => (prev + 1) % data.length);
-    };
-    // prev, render previous
-    const handlePrev = () => {
-      setCurrent(
-        current === 0 ? data.length - 1 : (prev) => (prev - 1) % data.length
-      );
-    };
-    // change old set with new set
-    const handleNewSet = () => {
-      setCurrent(0);
-      setData([]);
-      setClick((prev) => prev + 1);
-    };
+  // when next, render next obj in arr
+  const handleNext = () => {
+    setCurrent((prev) => (prev + 1) % data.length);
+  };
+  // prev, render previous
+  const handlePrev = () => {
+    setCurrent(
+      current === 0 ? data.length - 1 : (prev) => (prev - 1) % data.length
+    );
+  };
+  // change old set with new set
+  const handleNewSet = () => {
+    setCurrent(0);
+    setData([]);
+    setClick((prev) => prev + 1);
   };
 
   // display status
@@ -114,6 +115,12 @@ const SearchArt = ({ style }) => {
       // console.log(data);
       return (
         <>
+          <div className="nav-button">
+            <button onClick={handleNewSet}>New Set</button>
+            <br />
+            <button onClick={handlePrev}>{"<"}</button>
+            <button onClick={handleNext}>{">"}</button>
+          </div>
           <div className="art-info">
             <h3>{data?.[current]?.title}</h3>
             {data?.[current]?.description !== null ? (
@@ -165,11 +172,11 @@ const SearchArt = ({ style }) => {
         placeholder="title keyword"
       ></input>
       <button onClick={handleSearch}>Search</button>
+      <div>{display()}</div>
       <br />
       <Link to="/" style={style}>
         Back to Home
       </Link>
-      <div>{display()}</div>
     </div>
   );
 };
