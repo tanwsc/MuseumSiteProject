@@ -27,42 +27,28 @@ const SearchArt = ({ style }) => {
       setStatus("loading");
       try {
         const res = await fetch(
-          `https://api.harvardartmuseums.org/object?apikey=${apikey}&size=59`
+          `${harvardArtMuseumUrl}&title=${searchKey}&fields=objectnumber,title,people,period,dated,classification,culture,medium,dimensions,description,images`
         );
         const searchResult = await res.json();
 
-        // const regex = new RegExp(searchKey, "i");
-        // // console.log(searchKey);
-        // const checkSearch = searchResult.records.filter((c) => {
-        //   if (regex.test(c.name)) {
-        //     return true;
-        //   }
-        //   return false;
-        // });
-        // console.log(checkSearch[0].id);
-        // setSearchId(`${checkSearch[0].id}`);
-
-        const resp = await fetch(
-          `${harvardArtMuseumUrl}&title=${searchKey}&size=5&page=${click}`
-        );
-        const searchResultData = await resp.json();
+        // const resp = await fetch(
+        //   `${harvardArtMuseumUrl}&title=${searchKey}&size=5&page=${click}`
+        // );
+        // const searchResultData = await resp.json();
         setStatus("resolved");
-        console.log(searchResultData.records);
+        // console.log(searchResultData.records);
 
         // filter
-        // const filterData = searchResultData.records.filter((r) => {
-        //   if (
-        //     !r.hasOwnProperty("primaryimageurl") ||
-        //     r.primaryimageurl === null
-        //   ) {
-        //     return false;
-        //   }
-        //   return true;
-        // });
-        // console.log(filterData);
+        const filterData = searchResult.records.filter((r) => {
+          if (!r.hasOwnProperty("images") || r.images.length === 0) {
+            return false;
+          }
+          return true;
+        });
+        console.log(filterData);
 
         // find artist name if exists
-        for (let obj of searchResultData.records) {
+        for (let obj of filterData) {
           if (obj.hasOwnProperty("people") && obj.people[0].length !== 0) {
             const artists = [];
             for (let p of obj.people) {
@@ -80,7 +66,7 @@ const SearchArt = ({ style }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                image: obj.primaryimageurl,
+                image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
           } else {
@@ -95,7 +81,7 @@ const SearchArt = ({ style }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                image: obj.primaryimageurl,
+                image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
           }
@@ -104,165 +90,11 @@ const SearchArt = ({ style }) => {
         console.log(error);
       }
     };
+    console.log(data);
     makeAPICall();
   };
 
-  // fetch based on input data
-  // const makeAPICall = async () => {
-  //   setStatus("loading");
-  //   try {
-  //     const res = await fetch(
-  //       `https://api.harvardartmuseums.org/classification?apikey=${apikey}&size=59`
-  //     );
-  //     const searchResult = await res.json();
-
-  //     const regex = new RegExp(searchKey, "i");
-  //     const checkSearch = searchResult.records.filter((c) => {
-  //       // regex.test(c.name);
-  //       if (regex.test(c.name)) {
-  //         return true;
-  //       }
-  //       return false;
-  //     });
-  //     console.log(checkSearch[0].id);
-  //     // setSearchId(`${checkSearch[0].id}`);
-
-  //     const resp = await fetch(
-  //       `${harvardArtMuseumUrl}&classification=${checkSearch[0].id}&size=5&page=${click}`
-  //     );
-  //     const searchResultData = await resp.json();
-  //     setStatus("resolved");
-  //     console.log(searchResultData.records);
-
-  //     // filter
-  //     const filterData = searchResultData.records.filter((r) => {
-  //       if (
-  //         !r.hasOwnProperty("primaryimageurl") ||
-  //         r.primaryimageurl === null
-  //       ) {
-  //         return false;
-  //       }
-  //       return true;
-  //     });
-  //     console.log(filterData);
-
-  //     // find artist name if exists
-  //     for (let obj of filterData) {
-  //       if (obj.hasOwnProperty("people") && obj.people[0].length !== 0) {
-  //         const artists = [];
-  //         for (let p of obj.people) {
-  //           artists.push(p.name);
-  //         }
-  //         setData((data) => [
-  //           ...data,
-  //           {
-  //             title: obj.title,
-  //             artist: artists.join(", "),
-  //             culture: obj.culture,
-  //             period: obj.period,
-  //             date: obj.dated,
-  //             classification: obj.classification,
-  //             medium: obj.medium,
-  //             dimensions: obj.dimensions,
-  //             description: obj.description,
-  //             image: obj.primaryimageurl,
-  //           },
-  //         ]);
-  //       } else {
-  //         setData((data) => [
-  //           ...data,
-  //           {
-  //             title: obj.title,
-  //             culture: obj.culture,
-  //             period: obj.period,
-  //             date: obj.dated,
-  //             classification: obj.classification,
-  //             medium: obj.medium,
-  //             dimensions: obj.dimensions,
-  //             description: obj.description,
-  //             image: obj.primaryimageurl,
-  //           },
-  //         ]);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // makeAPICall();
-
-  // useEffect(() => {
-  // }, [click]);
-
-  // useEffect(() => {
-  //   const makeAPICall = async () => {
-  //     try {
-  //       const resp = await fetch(
-  //         `${harvardArtMuseumUrl}&classification=${checkSearch[0].id}&size=5&page=${click}`
-  //       );
-  //       const searchResultData = await resp.json();
-  //       setStatus("resolved");
-  //       console.log(searchResultData.records);
-
-  //       // filter
-  //       const filterData = searchResultData.records.filter((r) => {
-  //         if (
-  //           !r.hasOwnProperty("primaryimageurl") ||
-  //           r.primaryimageurl === null
-  //         ) {
-  //           return false;
-  //         }
-  //         return true;
-  //       });
-  //       console.log(filterData);
-
-  //       // find artist name if exists
-  //       for (let obj of filterData) {
-  //         if (obj.hasOwnProperty("people") && obj.people[0].length !== 0) {
-  //           const artists = [];
-  //           for (let p of obj.people) {
-  //             artists.push(p.name);
-  //           }
-  //           setData((data) => [
-  //             ...data,
-  //             {
-  //               title: obj.title,
-  //               artist: artists.join(", "),
-  //               culture: obj.culture,
-  //               period: obj.period,
-  //               date: obj.dated,
-  //               classification: obj.classification,
-  //               medium: obj.medium,
-  //               dimensions: obj.dimensions,
-  //               description: obj.description,
-  //               image: obj.primaryimageurl,
-  //             },
-  //           ]);
-  //         } else {
-  //           setData((data) => [
-  //             ...data,
-  //             {
-  //               title: obj.title,
-  //               culture: obj.culture,
-  //               period: obj.period,
-  //               date: obj.dated,
-  //               classification: obj.classification,
-  //               medium: obj.medium,
-  //               dimensions: obj.dimensions,
-  //               description: obj.description,
-  //               image: obj.primaryimageurl,
-  //             },
-  //           ]);
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  // }, [searchId]);
-
   // when next, render next obj in arr
-
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % data.length);
   };
@@ -288,47 +120,79 @@ const SearchArt = ({ style }) => {
       return <p>Loading</p>;
     } else if (status === "resolved") {
       console.log("resolved");
-      // console.log(data);
+      console.log(data);
       return (
         <>
-          <div className="nav-button">
-            <button onClick={handleNewSet}>New Set</button>
-            <br />
-            <button onClick={handlePrev}>{"<"}</button>
-            <button onClick={handleNext}>{">"}</button>
-          </div>
           <div className="search-info">
             <h2>{data?.[current]?.title}</h2>
             {data?.[current]?.description !== null ? (
-              <p>{data?.[current]?.description}</p>
+              <p>
+                <span>Description</span>
+                <br />
+                {data?.[current]?.description}
+              </p>
             ) : null}
             {data?.[current]?.date !== null ? (
-              <p>{data?.[current]?.date}</p>
+              <p>
+                <span>Date</span>
+                <br />
+                {data?.[current]?.date}
+              </p>
             ) : null}
             {data?.[current]?.hasOwnProperty("artist") &&
             data?.[current]?.artist !== null ? (
-              <p>{data?.[current]?.artist}</p>
+              <p>
+                <span>Artist/s</span>
+                <br />
+                {data?.[current]?.artist}
+              </p>
             ) : null}
             {data?.[current]?.classification !== null ? (
-              <p>{data?.[current]?.classification}</p>
+              <p>
+                <span>Classification</span>
+                <br />
+                {data?.[current]?.classification}
+              </p>
             ) : null}
             {data?.[current]?.culture !== null ? (
-              <p>{data?.[current]?.culture}</p>
+              <p>
+                <span>Culture</span>
+                <br />
+                {data?.[current]?.culture}
+              </p>
             ) : null}
             {data?.[current]?.period !== null ? (
-              <p>{data?.[current]?.period}</p>
+              <p>
+                <span>Period</span>
+                <br />
+                {data?.[current]?.period}
+              </p>
             ) : null}
             {data?.[current]?.medium !== null ? (
-              <p>{data?.[current]?.medium}</p>
+              <p>
+                <span>Medium</span>
+                <br />
+                {data?.[current]?.medium}
+              </p>
             ) : null}
             {data?.[current]?.dimensions !== null ? (
-              <p>{data?.[current]?.dimensions}</p>
+              <p>
+                <span>Dimensions</span>
+                <br />
+                {data?.[current]?.dimensions}
+              </p>
             ) : (
               data?.[current]?.dimensions
             )}
           </div>
 
           <div className="search-image">
+            <div className="nav-button">
+              <button onClick={handleNewSet}>New Set</button>
+              <br />
+              <button onClick={handlePrev}>{"<"}</button>
+              <button onClick={handleNext}>{">"}</button>
+            </div>
             <p>
               {current + 1} / {data.length}
             </p>
@@ -336,7 +200,7 @@ const SearchArt = ({ style }) => {
               src={
                 data?.[current]?.image === null ? "" : data?.[current]?.image
               }
-              alt="img"
+              alt="Apologies, not found."
             />
           </div>
         </>
