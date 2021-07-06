@@ -30,14 +30,24 @@ const allOptions = [
 const ChooseSet = ({ style }) => {
   let options = allOptions.map((item) => {
     return (
-      <div className="options" key={item.name}>
+      <div className="option-button" key={item.name}>
         <Link to={`/art/${item.name}`} style={style}>
           {item.name}
         </Link>
       </div>
     );
   });
-  return options;
+  return (
+    <div className="selection">
+      <h2>Selected curations for you</h2>
+      <div>
+        <Link to="/" style={style}>
+          Back to Home
+        </Link>
+      </div>
+      <div className='options'>{options}</div>
+    </div>
+  );
 };
 
 export default ChooseSet;
