@@ -47,7 +47,7 @@ const ArtObject = ({ style }) => {
     oil: "&medium=2028177",
     textile: "&medium=2028387",
     watercolour: "&medium=2028206",
-    inkopaquewatercolour: "&medium=2028955",
+    "ink&opaquewatercolour": "&medium=2028955",
   };
   // console.log(allOptions[params.category]);
 
@@ -70,10 +70,7 @@ const ArtObject = ({ style }) => {
         // if key + value exist
         // not null || undefined || empty
         const filterData = museum.records.filter((r) => {
-          if (
-            !r.hasOwnProperty("primaryimageurl") ||
-            r.primaryimageurl === null
-          ) {
+          if (!r.hasOwnProperty("images") || r.images.length === 0) {
             return false;
           }
           return true;
@@ -103,7 +100,7 @@ const ArtObject = ({ style }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                image: obj.primaryimageurl,
+                image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
           } else {
@@ -118,7 +115,7 @@ const ArtObject = ({ style }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                image: obj.primaryimageurl,
+                image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
           }
@@ -149,6 +146,7 @@ const ArtObject = ({ style }) => {
     setClick((prev) => prev + 1);
   };
 
+  //////////////////////////////////////////////////////////////// render
   // display status
   const display = () => {
     if (status === "loading") {
@@ -223,9 +221,13 @@ const ArtObject = ({ style }) => {
           </div>
 
           <div className="art-image">
-            <p>
-              {current + 1} / {data.length}
-            </p>
+            <div className="img-button">
+              <button onClick={handlePrev}>{"<"}</button>
+              <button onClick={handleNext}>{">"}</button>
+              <p>
+                {current + 1} / {data.length}
+              </p>
+            </div>
             <img src={data?.[current]?.image} alt="img" />
           </div>
         </>
@@ -240,10 +242,6 @@ const ArtObject = ({ style }) => {
           Back to Home
         </Link>
         <button onClick={handleNewSet}>New Set</button>
-      </div>
-      <div className="img-button">
-        <button onClick={handlePrev}>{"<"}</button>
-        <button onClick={handleNext}>{">"}</button>
       </div>
       {display()}
     </div>
