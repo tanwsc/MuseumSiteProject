@@ -69,8 +69,15 @@ img {
   width: 90%;
 }
 
-.options {
-  margin: 20px auto;
+.selection {
+  width: 80%;
+  height: 400px;
+  margin: 30px auto;
+}
+
+.option-button {
+  margin: 30px auto;
+  display: inline-block;
 }
 
 @media screen and (min-width: 900px) {
@@ -80,23 +87,36 @@ img {
     max-width: 700px;
   }
 
-  .art-main {
+  .art-main,
+  .search-main {
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 2fr;
   }
 
-  .art-info {
+  .art-info,
+  .search-info {
     grid-column: 1 / 2;
     padding: 10px 0;
   }
 
-  .art-info h2 {
+  .search-info {
+    grid-row: 2 / 3;
+  }
+
+  .nav {
+    grid-column: 1 / 2;
+    grid-row: 3 / 5;
+  }
+
+  .art-info h2,
+  .search-info h2 {
     margin: 50px auto 40px auto;
     width: 70%;
   }
 
-  .art-info p {
+  .art-info p,
+  .search-info p {
     padding: 20px 20%;
     /* width: 70%; */
     background: rgb(223, 211, 195);
