@@ -18,17 +18,17 @@ import { Link } from "react-router-dom";
 // 2028955 - ink and opaque watercolour
 
 // keys to check for
-const objectDetail = [
-  "title",
-  // "people",
-  "period",
-  "dated",
-  "classification",
-  "medium",
-  "dimensions",
-  "description",
-  // "primaryimageurl",
-];
+// const objectDetail = [
+//   "title",
+//   // "people",
+//   "period",
+//   "dated",
+//   "classification",
+//   "medium",
+//   "dimensions",
+//   "description",
+//   // "primaryimageurl",
+// ];
 
 const ArtObject = ({ style }) => {
   const [status, setStatus] = useState("loading");
@@ -78,7 +78,11 @@ const ArtObject = ({ style }) => {
           }
           return true;
         });
-        // console.log(filterData);
+        console.log(filterData);
+
+        if (filterData.length === 0) {
+          return setClick((prev) => prev + 1);
+        }
 
         // find artist name if exists
         for (let obj of filterData) {
@@ -237,7 +241,7 @@ const ArtObject = ({ style }) => {
         </Link>
         <button onClick={handleNewSet}>New Set</button>
       </div>
-      <div className="nav-button">
+      <div className="img-button">
         <button onClick={handlePrev}>{"<"}</button>
         <button onClick={handleNext}>{">"}</button>
       </div>
