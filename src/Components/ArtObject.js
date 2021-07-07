@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
 
 // classifications
 // 17 - photographs
@@ -15,7 +16,7 @@ import { useState, useEffect } from "react";
 // 2028206 - watercolour
 // 2028955 - ink and opaque watercolour
 
-const ArtObject = ({ url }) => {
+const ArtObject = ({ style, url }) => {
   const [status, setStatus] = useState("idle");
   const [data, setData] = useState([]);
   const [click, setClick] = useState(1);
@@ -31,7 +32,9 @@ const ArtObject = ({ url }) => {
     const makeAPICall = async () => {
       setStatus("loading");
       try {
-        const res = await fetch(harvardArtMuseumUrl);
+        const res = await fetch(
+          `https://api.harvardartmuseums.org/object?apikey=${apikey}${url}&size=5&page=${click}`
+        );
         const museum = await res.json();
         setStatus("resolved");
         // console.log(museum.records);
@@ -194,10 +197,16 @@ const ArtObject = ({ url }) => {
 
           <div className="art-image">
             <div className="img-button">
-              <button onClick={handleNewSet}>New Set</button>
+              <Button className={style.button} onClick={handleNewSet}>
+                New Set
+              </Button>
               <br />
-              <button onClick={handlePrev}>{"<"}</button>
-              <button onClick={handleNext}>{">"}</button>
+              <Button className={style.button} onClick={handlePrev}>
+                {"<"}
+              </Button>
+              <Button className={style.button} onClick={handleNext}>
+                {">"}
+              </Button>
             </div>
             <p>
               {current + 1} / {data.length}

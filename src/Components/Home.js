@@ -1,18 +1,52 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 
-const Home = ({style}) => {
+const Home = ({ style }) => {
   return (
-    <div className="home">
-      <h1>Collections from Harvard Art Museum</h1>
-      <p>homepage</p>
-      <Link to="/art" style={style}>
-        Choose Set
-      </Link>
-      <Link to="/search" style={style}>
-        Search for Art
-      </Link>
-    </div>
+    // <div className="home">
+    //   <h1>mini curates</h1>
+    //   <p>
+    //     Welcome to Mini Curates. Start by picking out a category that we've
+    //     prepared for you. You'll receive a bite-sized selection of artpieces for
+    //     you to browse through. Want more? You can always request for a new set
+    //     to look at. Want something a bit more specific? You can look up a
+    //     keyword of a title and we'll find something for you.
+    //   </p>
+    //   <p>We hope you enjoy your stay.</p>
+    //   <Button className={style.button} component={Link} to="/art">
+    //     Choose Set
+    //   </Button>
+    //   <Button className={style.button} component={Link} to="/search">
+    //     Search for Art
+    //   </Button>
+    // </div>
+
+    <Container maxWidth='sm'>
+      <Typography variant="h1" className={style.typoHeaders}>
+        mini curates
+      </Typography>
+      <Typography variant="body1">
+        Welcome to Mini Curates. Start by picking out a category that we've
+        prepared for you. You'll receive a bite-sized selection of artpieces for
+        you to browse through. Want more? You can always request for a new set
+        to look at. Want something a bit more specific? You can look up a
+        keyword of a title and we'll find something for you.
+      </Typography>
+      <br />
+      <Typography variant="body1">We hope you enjoy your stay.</Typography>
+      <Box>
+        <Button className={style.button} component={Link} to="/art">
+          Choose Set
+        </Button>
+        <Button className={style.button} component={Link} to="/search">
+          Search for Art
+        </Button>
+      </Box>
+    </Container>
   );
 };
 

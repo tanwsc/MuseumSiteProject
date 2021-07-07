@@ -76,7 +76,7 @@ img {
 }
 
 .option-button {
-  margin: 30px auto;
+  margin: 0 auto;
   display: inline-block;
 }
 
@@ -98,6 +98,8 @@ img {
   .search-info {
     grid-column: 1 / 2;
     padding: 10px 0;
+    height: 100vh;
+    overflow-y: auto;
   }
 
   .search-info {
