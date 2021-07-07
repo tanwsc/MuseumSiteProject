@@ -1,11 +1,13 @@
 import * as React from "react";
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 import ArtObject from "./ArtObject.js";
 
 const SearchArt = ({ style }) => {
   const inputSearchRef = useRef();
+  const history = useHistory();
   const [searchKey, setSearchKey] = useState("");
 
   const url = `&title=${searchKey}&fields=objectnumber,title,people,period,dated,classification,culture,medium,dimensions,description,images`;
@@ -13,6 +15,7 @@ const SearchArt = ({ style }) => {
   // get input word
   const handleSearch = () => {
     setSearchKey(`${inputSearchRef.current.value}`);
+    history.push(`/search?q=${inputSearchRef.current.value}`);
     console.log(inputSearchRef.current.value);
   };
 
@@ -25,17 +28,24 @@ const SearchArt = ({ style }) => {
           ref={inputSearchRef}
           placeholder="title keyword"
         ></input>
-        <button onClick={handleSearch}>Search</button>
+        <Button className={style.button} onClick={handleSearch}>
+          Search
+        </Button>
       </div>
-      {searchKey === "" ? null : <ArtObject url={url} />}
+      {searchKey === "" ? null : <ArtObject style={style} url={url} />}
       <br />
       <div className="nav">
-        <Link to="/art" style={style}>
+        <Button
+          className={style.button}
+          component={Link}
+          to="/art"
+          style={style}
+        >
           Choose Set
-        </Link>
-        <Link to="/" style={style}>
+        </Button>
+        <Button className={style.button} component={Link} to="/" style={style}>
           Back to Home
-        </Link>
+        </Button>
       </div>
     </div>
   );
