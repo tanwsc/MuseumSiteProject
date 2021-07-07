@@ -1,7 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 
 // classifications
 // 17 - photographs
@@ -17,47 +15,19 @@ import { Link } from "react-router-dom";
 // 2028206 - watercolour
 // 2028955 - ink and opaque watercolour
 
-// keys to check for
-// const objectDetail = [
-//   "title",
-//   // "people",
-//   "period",
-//   "dated",
-//   "classification",
-//   "medium",
-//   "dimensions",
-//   "description",
-//   // "primaryimageurl",
-// ];
-
-const ArtObject = ({ style }) => {
-  const [status, setStatus] = useState("loading");
+const ArtObject = ({ url }) => {
+  const [status, setStatus] = useState("idle");
   const [data, setData] = useState([]);
   const [click, setClick] = useState(1);
   const [current, setCurrent] = useState(0);
 
-  const params = useParams();
-  const allOptions = {
-    // photographs: "&classification=17",
-    drawings: "&classification=21",
-    prints: "&classification=23",
-    paintings: "&classification=26",
-    paintingswcalligraphy: "&classification=80",
-    ink: "&medium=2028195",
-    oil: "&medium=2028177",
-    textile: "&medium=2028387",
-    watercolour: "&medium=2028206",
-    "ink&opaquewatercolour": "&medium=2028955",
-  };
-  // console.log(allOptions[params.category]);
-
   const apikey = process.env.REACT_APP_APIKEY;
-  const harvardArtMuseumUrl = `https://api.harvardartmuseums.org/object?apikey=${apikey}${
-    allOptions[`${params.category}`]
-  }&size=5&page=${click}`;
+  const harvardArtMuseumUrl = `https://api.harvardartmuseums.org/object?apikey=${apikey}${url}&size=5&page=${click}`;
 
   //////////////////////////////////////////////////////////////// fetch api
   useEffect(() => {
+    setData([]);
+    setCurrent(0);
     const makeAPICall = async () => {
       setStatus("loading");
       try {
@@ -149,7 +119,9 @@ const ArtObject = ({ style }) => {
   //////////////////////////////////////////////////////////////// render
   // display status
   const display = () => {
-    if (status === "loading") {
+    if (status === "idle") {
+      return null;
+    } else if (status === "loading") {
       return <p>Loading</p>;
     } else if (status === "resolved") {
       console.log("resolved");
@@ -222,75 +194,22 @@ const ArtObject = ({ style }) => {
 
           <div className="art-image">
             <div className="img-button">
+              <button onClick={handleNewSet}>New Set</button>
+              <br />
               <button onClick={handlePrev}>{"<"}</button>
               <button onClick={handleNext}>{">"}</button>
-              <p>
-                {current + 1} / {data.length}
-              </p>
             </div>
-            <img src={data?.[current]?.image} alt="img" />
+            <p>
+              {current + 1} / {data.length}
+            </p>
+            <img src={data?.[current]?.image} alt="Apologies, not found" />
           </div>
         </>
       );
     }
   };
 
-  return (
-    <div className="art-main">
-      <div>
-        <Link to="/" style={style}>
-          Back to Home
-        </Link>
-        <button onClick={handleNewSet}>New Set</button>
-      </div>
-      {display()}
-    </div>
-  );
+  return <>{display()}</>;
 };
 
 export default ArtObject;
-
-//////////////////////////////////////////////////////////////// map out data
-// only available keys and key values in each obj
-// const mapData = (data) => {
-// for (let art of data) {
-//   for (let k in art) {
-//     console.log(k, art[k]);
-//     if (art[k] === null) {
-//       delete k
-//     }
-//   }
-// }
-// return data.map((art, index) => {
-// for (let k in art) {
-//   if (art[k] !== null) {
-//     // console.log(k);
-//     // console.log(k, art[k]);
-//     return (
-//       <>
-//         <p>
-//           {k}
-//           <br />
-//           <span>{art?.[k]}</span>
-//         </p>
-//       </>
-//     );
-//   }
-// }
-
-// return (
-// <div key={index}>
-//   <h3>{art.title}</h3>
-//   <p>{art.description}</p>
-//   <p>{art.date}</p>
-//   <p>{art.artist}</p>
-//   <p>{art.classification}</p>
-//   <p>{art.culture}</p>
-//   <p>{art.period}</p>
-//   <p>{art.medium}</p>
-//   <p>{art.dimensions}</p>
-//   <img src={art.image} alt="img" />
-// </div> );
-//   });
-// };
-// mapData(data);

@@ -7,7 +7,7 @@ const Home = ({style}) => {
       <h1>Collections from Harvard Art Museum</h1>
       <p>homepage</p>
       <Link to="/art" style={style}>
-        Generate Set
+        Choose Set
       </Link>
       <Link to="/search" style={style}>
         Search for Art

@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Components/Home.js";
 import ChooseSet from "./Components/ChooseSet.js";
-import ArtObject from "./Components/ArtObject.js";
+import GenerateSet from "./Components/GenerateSet.js";
 import SearchArt from "./Components/SearchArt.js";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
           {/* Art sets */}
           <Route path="/art/:category">
-            <ArtObject style={linkStyle} />
+            <GenerateSet style={linkStyle} />
           </Route>
           <Route path="/art">
             <ChooseSet style={linkStyle} />
