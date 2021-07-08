@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import Modal from "./Modal.js";
 
 // classifications
 // 17 - photographs
@@ -24,6 +25,7 @@ const ArtObject = ({ style, url }) => {
   const [data, setData] = useState([]);
   const [click, setClick] = useState(1);
   const [current, setCurrent] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const apikey = process.env.REACT_APP_APIKEY;
   const harvardArtMuseumUrl = `https://api.harvardartmuseums.org/object?apikey=${apikey}${url}&size=5&page=${click}`;
@@ -76,6 +78,7 @@ const ArtObject = ({ style, url }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
+                baseImg: obj.primaryimageurl,
                 image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
@@ -91,6 +94,7 @@ const ArtObject = ({ style, url }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
+                baseImg: obj.primaryimageurl,
                 image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
@@ -120,6 +124,15 @@ const ArtObject = ({ style, url }) => {
     setCurrent(0);
     setData([]);
     setClick((prev) => prev + 1);
+  };
+
+  // enlarge image
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   //////////////////////////////////////////////////////////////// render
@@ -227,7 +240,17 @@ const ArtObject = ({ style, url }) => {
               <Typography variant="body1">
                 {current + 1} / {data.length}
               </Typography>
-              <img src={data?.[current]?.image} alt="Apologies, not found" />
+              <img
+                src={data?.[current]?.image}
+                alt="Apologies, not found"
+                onClick={handleOpen}
+              />
+              <Modal
+                imgOpen={open}
+                imgClose={handleClose}
+                style={style}
+                img={data?.[current]?.baseImg}
+              />
             </Grid>
             <Grid item sm={1} md={1}>
               <Button className={style.artButton} onClick={handleNext}>
