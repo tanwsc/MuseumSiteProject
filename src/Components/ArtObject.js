@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 
 // classifications
 // 17 - photographs
@@ -98,7 +101,7 @@ const ArtObject = ({ style, url }) => {
       }
     };
     makeAPICall();
-  }, [harvardArtMuseumUrl]);
+  }, [harvardArtMuseumUrl, click, url, apikey]);
   console.log(data);
 
   //////////////////////////////////////////////////////////////// navigate obj
@@ -131,8 +134,7 @@ const ArtObject = ({ style, url }) => {
       // console.log(data);
       return (
         <>
-          <div className="art-info">
-            {/* {mapData(data)} */}
+          {/* <div className="art-info">
             <h2>{data?.[current]?.title}</h2>
             {data?.[current]?.description !== null ? (
               <p>
@@ -212,7 +214,109 @@ const ArtObject = ({ style, url }) => {
               {current + 1} / {data.length}
             </p>
             <img src={data?.[current]?.image} alt="Apologies, not found" />
-          </div>
+          </div> */}
+
+          <Grid container className={style.artMain}>
+            <Grid item sm={12} md={4}>
+              <Container className={style.artInfo}>
+                <Typography variant="h3" className={style.artHeader}>
+                  {data?.[current]?.title}
+                </Typography>
+                {data?.[current]?.description !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Description</span>
+                      <br />
+                      {data?.[current]?.description}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.date !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Date</span>
+                      <br />
+                      {data?.[current]?.date}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.hasOwnProperty("artist") &&
+                data?.[current]?.artist !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Artist/s</span>
+                      <br />
+                      {data?.[current]?.artist}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.classification !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Classification</span>
+                      <br />
+                      {data?.[current]?.classification}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.culture !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Culture</span>
+                      <br />
+                      {data?.[current]?.culture}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.period !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Period</span>
+                      <br />
+                      {data?.[current]?.period}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.medium !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Medium</span>
+                      <br />
+                      {data?.[current]?.medium}
+                    </Typography>
+                  </Container>
+                ) : null}
+                {data?.[current]?.dimensions !== null ? (
+                  <Container className={style.artData}>
+                    <Typography variant="body1">
+                      <span>Dimensions</span>
+                      <br />
+                      {data?.[current]?.dimensions}
+                    </Typography>
+                  </Container>
+                ) : null}
+              </Container>
+            </Grid>
+            <Grid item sm={1} md={1}>
+              <Button className={style.artButton} onClick={handlePrev}>
+                {"<"}
+              </Button>
+            </Grid>
+            <Grid item sm={10} md={6} className="artImage">
+              <Button className={style.button} onClick={handleNewSet}>
+                New Set
+              </Button>
+              <Typography variant="body1">
+                {current + 1} / {data.length}
+              </Typography>
+              <img src={data?.[current]?.image} alt="Apologies, not found" />
+            </Grid>
+            <Grid item sm={1} md={1}>
+              <Button className={style.artButton} onClick={handleNext}>
+                {">"}
+              </Button>
+            </Grid>
+          </Grid>
         </>
       );
     }

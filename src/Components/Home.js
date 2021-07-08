@@ -25,7 +25,7 @@ const Home = ({ style }) => {
     //   </Button>
     // </div>
 
-    <Container maxWidth='sm'>
+    <Container maxWidth="sm">
       <Typography variant="h1" className={style.typoHeaders}>
         mini curates
       </Typography>
@@ -37,8 +37,12 @@ const Home = ({ style }) => {
         keyword of a title and we'll find something for you.
       </Typography>
       <br />
+      <Typography>
+        All the data on this site is provided by an API from Harvard Art Museum. This site is not endorsed by them.
+      </Typography>
+      <br />
       <Typography variant="body1">We hope you enjoy your stay.</Typography>
-      <Box>
+      <Box className={style.nav}>
         <Button className={style.button} component={Link} to="/art">
           Choose Set
         </Button>
@@ -46,6 +50,11 @@ const Home = ({ style }) => {
           Search for Art
         </Button>
       </Box>
+      <footer className={style.footer}>
+        <Typography variant="caption">
+          © 2021. A small project by Charlene Tan.
+        </Typography>
+      </footer>
     </Container>
   );
 };
