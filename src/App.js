@@ -15,6 +15,10 @@ const theme = createTheme({
       main: "rgb(223, 211, 195)",
       dark: "rgb(205, 172, 129)",
     },
+    text: {
+      primary: "rgb(0, 48, 63)",
+      secondary: "rgb(89, 110, 121)",
+    },
   },
   typography: {
     htmlFontSize: 14,
@@ -28,9 +32,6 @@ const theme = createTheme({
     h3: {
       fontSize: "1.4rem",
     },
-  },
-  focused: {
-    color: "rgb(223, 211, 195)",
   },
 });
 
@@ -48,6 +49,9 @@ const useStyles = makeStyles({
   typoHeaders: {
     margin: "120px auto 40px auto",
     // fontSize: "1.4em",
+  },
+  typoBody: {
+    color: "rgb(89, 110, 121)",
   },
   nav: {
     margin: "20px auto",
@@ -146,6 +150,13 @@ const useStyles = makeStyles({
     textAlign: "center",
     background: "rgb(240, 236, 227)",
     color: "rgb(136, 110, 77)",
+  },
+  modal: {
+    display: "flex",
+    marginLeft: "50px",
+    alignItems: "center",
+    justifyContent: "center",
+    overflowY: "scroll",
   },
 });
 

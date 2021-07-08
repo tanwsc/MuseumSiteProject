@@ -11,7 +11,7 @@ const Home = ({ style }) => {
       <Typography variant="h1" className={style.typoHeaders}>
         mini curates
       </Typography>
-      <Typography variant="body1">
+      <Typography variant="body1" className={style.typoBody}>
         Welcome to Mini Curates. Start by picking out a category that we've
         prepared for you. You'll receive a bite-sized selection of artpieces for
         you to browse through. Want more? You can always request for a new set
@@ -19,11 +19,14 @@ const Home = ({ style }) => {
         keyword of a title and we'll find something for you.
       </Typography>
       <br />
-      <Typography>
-        All the data on this site is provided by an API from Harvard Art Museum. This site is not endorsed by them.
+      <Typography variant="body1" className={style.typoBody}>
+        All the data on this site is provided by an API from Harvard Art Museum.
+        This site is not endorsed by them.
       </Typography>
       <br />
-      <Typography variant="body1">We hope you enjoy your stay.</Typography>
+      <Typography variant="body1" className={style.typoBody}>
+        We hope you enjoy your stay.
+      </Typography>
       <Box className={style.nav}>
         <Button className={style.button} component={Link} to="/art">
           Choose Set
