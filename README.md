@@ -6,7 +6,7 @@ A website that generates bite-sized selections of artworks from Harvard Art Muse
 
 This project aims to provide an ease of mind when navigating through a museum website. Users have the option of choosing a selection from a recommended list of categories, or to look for something more specific through searching up a keyword of a title.
 
-Each selection generates up to 5 pieces of art, and users can look through as many or as little sets as they wish.
+Each set generates up to 5 pieces of art, and users can look through as many or as little sets as they wish.
 
 ### Tech Used
 
@@ -84,9 +84,7 @@ The search page allows users to type in a keyword that searches based off the ti
 
 ## APIs Used
 
-```
 [Harvard Art Museum API](https://harvardartmuseums.org/collections/api)
-```
 
 - Their API is quite expansive in terms of the details of each art object
 - Images come along with their API
@@ -96,10 +94,12 @@ The search page allows users to type in a keyword that searches based off the ti
 
 ## Acknowledgments
 [Harvard Art Museum](https://harvardartmuseums.org/)
+
 [Material UI](https://material-ui.com/)
 
 ---
 
 ## References
 [Harvard Art Museum API Toolkit and Guide](https://api-toolkit.herokuapp.com/)
+
 [Net Ninja Material UI Tutorials](https://www.youtube.com/playlist?list=PL4cUxeGkcC9gjxLvV4VEkZ6H6H4yWuS58)
