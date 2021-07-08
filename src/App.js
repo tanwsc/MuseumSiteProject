@@ -48,7 +48,6 @@ const useStyles = makeStyles({
   },
   typoHeaders: {
     margin: "120px auto 40px auto",
-    // fontSize: "1.4em",
   },
   typoBody: {
     color: "rgb(89, 110, 121)",
@@ -74,7 +73,6 @@ const useStyles = makeStyles({
   },
   artHeader: {
     margin: "20px auto 40px auto",
-    // fontSize: "1.4em",
     fontStyle: "italic",
     color: "rgb(136, 110, 77)",
   },
@@ -89,7 +87,7 @@ const useStyles = makeStyles({
   },
   artImage: {
     margin: "60px auto 10px auto",
-    // maxHeight: "100vh",
+    justifyItems: "center",
     overflowY: "scroll",
   },
   artButton: {
@@ -97,7 +95,6 @@ const useStyles = makeStyles({
     padding: "6px 12px",
     height: "100px",
     borderRadius: "5px",
-    // background: "rgb(223, 211, 195)",
     color: "rgb(89, 110, 121)",
     fontSize: "16px",
     textDecoration: "none",
@@ -157,6 +154,9 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
     overflowY: "scroll",
+  },
+  loading: {
+    marginTop: "120px",
   },
 });
 
