@@ -19,16 +19,20 @@ Each selection generates up to 5 pieces of art, and users can look through as ma
 ### Wireframes
 
 Your step by step planning sketch of your project, that you can post them as an image in here.
+![choices](https://git.generalassemb.ly/charlenetan/project2-MuseumSite/blob/master/picures/choices.png?raw=true)
+![main](https://git.generalassemb.ly/charlenetan/project2-MuseumSite/blob/master/picures/main.png?raw=true)
 
 ### User Stories
 
 The user can see
 - Recommended categories to choose from 
-- A selection of artworks based on their selected preference
-- Details of each individual artwork
+- A selection of art based on their selected preference
+- Details of each individual art
 - The option to search for a title keyword
-User can scroll through the different artworks selected for them
-The user can choose a different option to get a new set of artworks
+
+The user can scroll through the different art selected for them
+The user can get a new set of art for the same category
+The user can choose a different category of art
 
 ---
 
