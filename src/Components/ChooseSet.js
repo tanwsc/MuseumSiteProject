@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-// import { useTheme } from "@material-ui/core/styles";
-// import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -93,30 +91,8 @@ const allOptions = [
 ];
 
 const ChooseSet = ({ style, window }) => {
-  // const theme = useTheme();
-  // let options = allOptions.map((item) => {
-  //   return (
-  //     <div className="option-button" key={item.name}>
-  //       <Button
-  //         className={style.button}
-  //         component={Link}
-  //         to={`/art/${item.id}`}
-  //       >
-  //         {item.name}
-  //       </Button>
-  //     </div>
-  //   );
-  // });
+
   return (
-    // <div className="selection">
-    //   <h2>Selected curations for you</h2>
-    //   <div>
-    //     <Button className={style.button} component={Link} to="/">
-    //       Back to Home
-    //     </Button>
-    //   </div>
-    //   <div className="options">{options}</div>
-    // </div>
     <>
       <MenuBar style={style} window={window} />
       <Container className={style.cardGrid} maxWidth="md">

@@ -7,24 +7,6 @@ import Typography from "@material-ui/core/Typography";
 
 const Home = ({ style }) => {
   return (
-    // <div className="home">
-    //   <h1>mini curates</h1>
-    //   <p>
-    //     Welcome to Mini Curates. Start by picking out a category that we've
-    //     prepared for you. You'll receive a bite-sized selection of artpieces for
-    //     you to browse through. Want more? You can always request for a new set
-    //     to look at. Want something a bit more specific? You can look up a
-    //     keyword of a title and we'll find something for you.
-    //   </p>
-    //   <p>We hope you enjoy your stay.</p>
-    //   <Button className={style.button} component={Link} to="/art">
-    //     Choose Set
-    //   </Button>
-    //   <Button className={style.button} component={Link} to="/search">
-    //     Search for Art
-    //   </Button>
-    // </div>
-
     <Container maxWidth="sm">
       <Typography variant="h1" className={style.typoHeaders}>
         mini curates

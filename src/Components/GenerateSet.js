@@ -23,17 +23,6 @@ const GenerateSet = ({ style, window }) => {
   const url = allOptions[params.category];
 
   return (
-    // <div className="art-main">
-    //   <div className="nav">
-    //     <Button className={style.button} component={Link} to="/art">
-    //       Choose Set
-    //     </Button>
-    //     <Button className={style.button} component={Link} to="/">
-    //       Back to Home
-    //     </Button>
-    //   </div>
-    //   <ArtObject style={style} url={url} />
-    // </div>
     <>
       <MenuBar style={style} window={window} />
       <Container className={style.genMain}>
