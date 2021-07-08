@@ -4,15 +4,6 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
 export default function TransitionsModal({ style, imgOpen, imgClose, img }) {
-  //   const [open, setOpen] = React.useState(false);
-
-  //   const handleOpen = () => {
-  //     setOpen(true);
-  //   };
-
-//   const handleClose = () => {
-//     setOpen(false);
-//   };
 
   return (
     <div>
@@ -30,7 +21,11 @@ export default function TransitionsModal({ style, imgOpen, imgClose, img }) {
       >
         <Fade in={imgOpen}>
           <div>
-            <img id="transition-modal-description" src={img} alt="not found" />
+            <img
+              id="transition-modal-description"
+              src={img}
+              alt="Apologies, not found"
+            />
           </div>
         </Fade>
       </Modal>

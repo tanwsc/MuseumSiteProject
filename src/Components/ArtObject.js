@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Modal from "./Modal.js";
 
 // classifications
@@ -78,7 +79,7 @@ const ArtObject = ({ style, url }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                baseImg: obj.primaryimageurl,
+                baseImg: `${obj.images[0].iiifbaseuri}/full/full/0/default.jpg`,
                 image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
@@ -94,7 +95,7 @@ const ArtObject = ({ style, url }) => {
                 medium: obj.medium,
                 dimensions: obj.dimensions,
                 description: obj.description,
-                baseImg: obj.primaryimageurl,
+                baseImg: `${obj.images[0].iiifbaseuri}/full/full/0/default.jpg`,
                 image: `${obj.images[0].iiifbaseuri}/full/pct:50/0/default.jpg`,
               },
             ]);
@@ -141,7 +142,11 @@ const ArtObject = ({ style, url }) => {
     if (status === "idle") {
       return null;
     } else if (status === "loading") {
-      return <p>Loading</p>;
+      return (
+        <Container className={style.loading}>
+          <CircularProgress />
+        </Container>
+      );
     } else if (status === "resolved") {
       console.log("resolved");
       // console.log(data);
