@@ -40,22 +40,20 @@ Each set generates up to 5 pieces of art, and users can look through as many or 
   - Recommended categories to choose from
   - A selection of art based on their selected preference
   - Details of each individual art
-  - The option to search for a title keyword
 - The user can scroll through the different art selected for them
 - The user can get a new set of art for the same category
 - The user can choose a different category of art
+- The user has the option to search for art by a title keyword
 
 ---
 
 ## Planning and Development Process
 
-- I like art and I want to share it with others
-- Only some museum APIs had open access to the full data (and their images) of the art
-- Picked out Harvard Art Museum's API despite having not heard of the museum before
-- Realised I was a bit lost with navigating through the site
-- If I felt lost, how about others?
-- Decided to make a simple version of the museum site
-- Thought of introducing bits and pieces of the art collection to users
+- Started with main art display component (fetching data and rendering it)
+- Added pages to populate the site
+- Began to link options to manipulate the url and fetch different sets of data
+- Passed in the art component into the pages where it needs to render it out
+- s t y l i n g
 
 ### Problem-Solving Strategy
 
@@ -77,9 +75,10 @@ The search page allows users to type in a keyword that searches based off the ti
 
 ### Unsolved problems
 
+- Search function -- not just by title keyword
 - Theme creation
 - Image zoom -- Replaced with modal as placeholder but layout is not ideal
-- Overall layout and UX of website
+- Overall layout and UI of website
 - Refactoring the code
 
 ## APIs Used
