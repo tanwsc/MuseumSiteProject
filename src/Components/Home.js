@@ -9,10 +9,10 @@ const Home = ({ style }) => {
   return (
     <Container maxWidth="sm">
       <Typography variant="h1" className={style.typoHeaders}>
-        mini curates
+        pocket curates
       </Typography>
       <Typography variant="body1" className={style.typoBody}>
-        Welcome to Mini Curates. Start by picking out a category that we've
+        Welcome to Pocket Curates. Start by picking out a category that we've
         prepared for you. You'll receive a bite-sized selection of artpieces for
         you to browse through. Want more? You can always request for a new set
         to look at. Want something a bit more specific? You can look up a

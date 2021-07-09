@@ -1,4 +1,4 @@
-# mini curates
+# pocket curates
 
 A website that generates bite-sized selections of artworks from Harvard Art Museum.
 
