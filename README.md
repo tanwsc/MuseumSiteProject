@@ -19,14 +19,14 @@ Each set generates up to 5 pieces of art, and users can look through as many or 
 
 #### Recommended Categories
 
-![choices](https://git.generalassemb.ly/charlenetan/project2-MuseumSite/blob/master/picures/choices.png?raw=true)
+![choices](https://github.com/tanwsc/MuseumSiteProject/blob/master/picures/choices.png?raw=true)
 
 - Draft of page where user picks out a category
 - Will be redirected to a page with a set of art to look through
 
 #### Main Art Viewer
 
-![main](https://git.generalassemb.ly/charlenetan/project2-MuseumSite/blob/master/picures/main.png?raw=true)
+![main](https://github.com/tanwsc/MuseumSiteProject/blob/master/picures/main.png?raw=true)
 
 - Page where user views their set of art
 - Details to the left and image should take most space on the page
