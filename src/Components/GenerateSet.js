@@ -1,5 +1,4 @@
 import * as React from "react";
-// import { useRef, useState } from "react";
 import { useParams } from "react-router";
 import Container from "@material-ui/core/Container";
 import ArtObject from "./ArtObject.js";
